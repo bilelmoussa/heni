@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  web-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: heni-web-server
+    volumes:
+      - ./server/src:/app/server/src
+      - ./server/tsconfig.json:/app/server/tsconfig.json
+      - ./server/nodemon.json:/app/server/nodemon.json
+    ports:
+      - "8080:8080"
+    command: npm start
+    tty: true
+    stdin_open: true
+
+  web-client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev  
+    volumes: 
+      - ./client:/app/client
+      - /app/client/node_modules
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development  
+    restart: unless-stopped
+    container_name: web-client
+    links:
+      - web-server
+    command: npm start
+    tty: true
+    stdin_open: true

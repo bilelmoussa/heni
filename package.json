@@ -1,0 +1,22 @@
+{
+  "name": "heni",
+  "version": "1.0.0",
+  "description": "Heni Toutou Personal Website",
+  "main": "/server/dist/server.js",
+  "scripts": {
+    "live:server": "cd server && npm run live",
+    "server:build": "cd server && npm run build",
+    "live:client": "cd client && npm run start",
+    "client:build": "cd client && npm run build",
+    "live": "concurrently \"npm run live:server\" \"npm run live:client\""
+  },
+  "keywords": [],
+  "author": "Heni Toutou",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
+  }
+}
